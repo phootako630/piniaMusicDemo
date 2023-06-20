@@ -11,10 +11,7 @@
       <div class="text-white main-header-content">
         <h1 class="font-bold text-5xl mb-5">Listen to Great Music!</h1>
         <p class="w-full md:w-8/12 mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus et
-          dolor mollis, congue augue non, venenatis elit. Nunc justo eros,
-          suscipit ac aliquet imperdiet, venenatis et sapien. Duis sed magna
-          pulvinar, fringilla lorem eget, ullamcorper urna.
+          Your music zone, where you can listen to your favorite songs and artists.
         </p>
       </div>
     </div>
@@ -22,6 +19,7 @@
     <img
       class="relative block mx-auto mt-5 -mb-20 w-auto max-w-full"
       src="assets/img/introduction-music.png"
+      alt="Music"
     />
   </section>
 
@@ -252,10 +250,7 @@
       <!-- Scrub Container  -->
       <div class="w-full h-2 rounded bg-gray-200 relative cursor-pointer">
         <!-- Player Ball -->
-        <span
-          class="absolute -top-2.5 -ml-2.5 text-gray-800 text-lg"
-          style="left: 50%"
-        >
+        <span class="absolute -top-2.5 -ml-2.5 text-gray-800 text-lg" style="left: 50%">
           <i class="fas fa-circle"></i>
         </span>
         <!-- Player Progress Bar-->
@@ -273,14 +268,14 @@
 </template>
 
 <script>
-import AppHeader from "@/components/Header.vue";
-import Auth from "@/components/Auth.vue";
+import AppHeader from '@/components/Header.vue'
+import Auth from '@/components/Auth.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     AppHeader,
-    Auth,
-  },
-};
+    Auth
+  }
+}
 </script>

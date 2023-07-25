@@ -54,11 +54,12 @@
           </ul>
 
           <!-- Login Form -->
-          <form v-show="tab === 'login'">
+          <vee-form v-show="tab === 'login'">
             <!-- Email -->
             <div class="mb-3">
               <label class="inline-block mb-2">Email</label>
-              <input
+              <vee-field
+                name="email"
                 type="email"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                 placeholder="Enter Email"
@@ -79,8 +80,16 @@
             >
               Submit
             </button>
-          </form>
+          </vee-form>
           <!-- Registration Form -->
+          <div
+            class="text-white text-center font-bold p-4 rounded mb-4"
+            v-if="reg_show_alert"
+            :class="reg_alert_variant"
+            :disabled="reg_in_submission"
+          >
+            {{ reg_alert_msg }}
+          </div>
           <vee-form
             v-show="tab === 'register'"
             :validation-schema="schema"
@@ -205,13 +214,17 @@ export default {
         email: 'required|min:3|max:50|email',
         age: 'required|min_value:18|max_value:130',
         password: 'required|min:9|max:50|excluded:password',
-        confirm_password: 'confirmed:@password',
-        country: 'required|excluded:France',
-        tos: 'required'
+        confirm_password: 'passwords_mismatch:@password',
+        country: 'required|country_excluded:France',
+        tos: 'tos'
       },
       userData: {
         country: 'USA'
-      }
+      },
+      reg_in_submission: false,
+      reg_show_alert: false,
+      reg_alert_variant: 'bg-blue-500',
+      reg_alert_msg: 'Please wait...'
     }
   },
   computed: {
@@ -222,6 +235,13 @@ export default {
   },
   methods: {
     register(values) {
+      this.reg_show_alert = true
+      this.reg_in_submission = true
+      this.reg_alert_variant = 'bg-blue-500'
+      this.reg_alert_msg = 'Please wait...'
+
+      this.reg_alert_variant = 'bg-green-500'
+      this.reg_alert_msg = 'Success!'
       console.log(values)
     }
   }

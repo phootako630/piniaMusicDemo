@@ -24,14 +24,16 @@ export default {
     app.component('ErrorMessage', ErrorMessage)
 
     defineRule('required', required)
+    defineRule('tos', required)
     defineRule('min', min)
     defineRule('max', max)
     defineRule('alpha_spaces', alphaSpaces)
     defineRule('email', email)
     defineRule('min_value', minVal)
     defineRule('max_value', maxVal)
-    defineRule('confirmed', confirmed)
     defineRule('excluded', excluded)
+    defineRule('country_excluded', excluded)
+    defineRule('passwords_mismatch', confirmed)
 
     configure({
       generateMessage: (ctx) => {
@@ -43,13 +45,19 @@ export default {
           email: `The field ${ctx.field} must be a valid email.`,
           min_value: `The field ${ctx.field} is too low.`,
           max_value: `The field ${ctx.field} is too high.`,
-          confirmed: `The field ${ctx.field} does not match.`,
-          excluded: `You are not allowed to use this value for the field ${ctx.field}.`
+          passwords_mismatch: `The field ${ctx.field} does not match.`,
+          excluded: `You are not allowed to use this value for the field ${ctx.field}.`,
+          country_excluded: `Due to restrictions, we do not accept users from this location.`,
+          tos: `You must accept the Terms of Service.`
         }
         return messages[ctx.rule.name]
           ? messages[ctx.rule.name]
           : `The field ${ctx.field} is invalid.`
-      }
+      },
+      validateOnBlur: true,
+      validateOnChange: true,
+      validateOnInput: false,
+      validateOnModelUpdate: true
     })
   }
 }
